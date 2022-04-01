@@ -28,9 +28,17 @@ class Tree
   def insert(value, node = root)
     return nil if value == node.data
     if value < node.data
-      node.left.nil? ? node.left = Node.new(value) : insert(value, node.left)
+      if node.left.nil?
+        node.left = Node.new(value)
+      else
+        insert(value, node.left)
+      end
     else
-      node.right.nil? ? node.right = Node.new(value) : insert(value, node.right)
+      if node.right.nil?
+        node.right = Node.new(value)
+        else
+          insert(value, node.right)
+        end
     end
   end
 
