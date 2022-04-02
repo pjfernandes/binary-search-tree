@@ -25,7 +25,7 @@ class Tree
     root
   end
 
-  def insert(value, node = root)
+  def insert(value, node = @root)
     return nil if value == node.data
     if value < node.data
       if node.left.nil?
@@ -42,5 +42,13 @@ class Tree
     end
   end
 
+  def find(value, node = @root)
+    return node if node.nil? || node.data == value
+    if value < node.data
+      find(value, node.left)
+    else
+      find(value, node.right)
+    end
+  end
 
 end
