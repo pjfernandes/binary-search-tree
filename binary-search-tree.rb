@@ -36,19 +36,20 @@ class Tree
     else
       if node.right.nil?
         node.right = Node.new(value)
-        else
-          insert(value, node.right)
-        end
+      else
+        insert(value, node.right)
+      end
+    end
+
+    def find(value, node = @root)
+      return node if node.nil? || node.data == value
+      if value < node.data
+        find(value, node.left)
+      else
+        find(value, node.right)
+      end
     end
   end
 
-  def find(value, node = @root)
-    return node if node.nil? || node.data == value
-    if value < node.data
-      find(value, node.left)
-    else
-      find(value, node.right)
-    end
-  end
 
 end
