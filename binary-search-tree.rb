@@ -104,8 +104,12 @@ class Tree
     print "#{node.data} -> "
   end
 
-  def height
+  def height(node = @root)
+    return 0 if node.nil?
+    left = height(node.left)
+    right = height(node.right)
 
+    return [left, right].max + 1
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
