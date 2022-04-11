@@ -86,6 +86,24 @@ class Tree
     level_order(array.shift, array)
   end
 
+  def preorder(node = @root)
+    print "#{node.data} -> "
+    preorder(node.left) unless node.left.nil?
+    preorder(node.right) unless node.right.nil?
+  end
+
+  def inorder(node = @root)
+    preorder(node.left) unless node.left.nil?
+    print "#{node.data} -> "
+    preorder(node.right) unless node.right.nil?
+  end
+
+  def postorder(node = @root)
+    preorder(node.left) unless node.left.nil?
+    preorder(node.right) unless node.right.nil?
+    print "#{node.data} -> "
+  end
+
 end
 
 t = Tree.new([50, 30, 20, 40, 70, 60, 80])
