@@ -93,15 +93,25 @@ class Tree
   end
 
   def inorder(node = @root)
-    preorder(node.left) unless node.left.nil?
+    inorder(node.left) unless node.left.nil?
     print "#{node.data} -> "
-    preorder(node.right) unless node.right.nil?
+    inorder(node.right) unless node.right.nil?
   end
 
   def postorder(node = @root)
-    preorder(node.left) unless node.left.nil?
-    preorder(node.right) unless node.right.nil?
+    postorder(node.left) unless node.left.nil?
+    postorder(node.right) unless node.right.nil?
     print "#{node.data} -> "
+  end
+
+  def height
+
+  end
+
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
 end
