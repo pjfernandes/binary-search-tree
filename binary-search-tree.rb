@@ -109,11 +109,16 @@ class Tree
     edges += 1
     left = height(node.left, edges)
     right = height(node.right, edges)
-
     return [left, right].max
   end
 
-
+  def depth(node = @root, edges = self.height + 1)
+    return edges if node.nil?
+    edges -= 1
+    left = depth(node.left, edges)
+    right = depth(node.right, edges)
+    return [left, right].max
+  end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
