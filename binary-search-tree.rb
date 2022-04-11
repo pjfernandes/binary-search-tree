@@ -40,16 +40,52 @@ class Tree
         insert(value, node.right)
       end
     end
+  end
 
-    def find(value, node = @root)
-      return node if node.nil? || node.data == value
-      if value < node.data
-        find(value, node.left)
-      else
-        find(value, node.right)
-      end
+  def find(value, node = @root)
+    return node if node.nil? || node.data == value
+    if value < node.data
+      find(value, node.left)
+    else
+      find(value, node.right)
     end
   end
 
+  def min_value_node(node)
+    current = node
+    while !current.left.nil?
+      current = current.left
+    end
+    current
+  end
+
+  def delete(value, node = @root)
+    return node if node.nil? #base case
+
+    if value < node.data
+      node.left = delete(value, node.left)
+
+    elsif value > node.data
+      node.right = delete(value, node.right)
+
+    else
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      temp = min_value_node(node.right)
+      node.data = temp.data
+      node.right = delete(node.right, temp.data)
+    end
+  end
+
+  def level_order(node = @root, array = [])
+    print "#{node.data} -> "
+    array << node.left unless node.left.nil?
+    array << node.right unless node.right.nil?
+    return if array.empty?
+    level_order(array.shift, array)
+  end
 
 end
+
+t = Tree.new([50, 30, 20, 40, 70, 60, 80])
